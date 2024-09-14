@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "tsnd"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inovatec-uni-goias/cidade-em-foco.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/inovatec-uni-goias/cidade-em-foco/issues"
+  },
+  "homepage": "https://github.com/inovatec-uni-goias/cidade-em-foco#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@typescript-eslint/parser": "^8.5.0",
+    "eslint": "^9.10.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
