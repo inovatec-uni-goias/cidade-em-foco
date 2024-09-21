@@ -18,7 +18,7 @@ public class Report {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long reportId;
 
     private Double latitude;
     private Double longitude;
@@ -27,7 +27,7 @@ public class Report {
     private LocalDateTime date;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "userId")
     private User user;
 
     public Report(Double latitude, Double longitude, LocalDateTime date) {
