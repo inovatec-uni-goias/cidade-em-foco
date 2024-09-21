@@ -25,27 +25,33 @@ public class UserService {
 
     public User findUserById(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário inexistente"));
 
         return user;
 
     }
 
     public User updateUser(Long id, User userUpdates) {
-        User user = findUserById(id);
+        if (userRepository.existsById(id)) {
+            User user = findUserById(id);
 
-        user.setDateOfBirth(userUpdates.getDateOfBirth());
-        user.setName(userUpdates.getName());
-        user.setLastName(userUpdates.getLastName());
+            user.setDateOfBirth(userUpdates.getDateOfBirth());
+            user.setName(userUpdates.getName());
+            user.setLastName(userUpdates.getLastName());
 
-        return userRepository.save(user);
+            return userRepository.save(user);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Não foi possível atualizar as informações: Usuário inexistente");
+        }
+
     }
 
     public void deleteUser(Long id) {
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não foi possível deletar, usuário não encontrado");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não foi possível deletar: Usuário inexistente");
         }
 
     }

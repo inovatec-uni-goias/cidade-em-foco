@@ -1,5 +1,7 @@
 package com.br.inovatec.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,27 +25,39 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        userService.createUser(user);
+        User response = userService.createUser(user);
+        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping
-    public ResponseEntity<User> listAllUsers() {
+    public ResponseEntity<List<User>> listAllUsers() {
+        List<User> response = userService.listAllUsers();
+        if (response.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
 
+        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        User response = userService.findUserById(id);
 
+        return ResponseEntity.ok().body(response);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable long id) {
+    public ResponseEntity<User> updateUser(@PathVariable long id, User userUpdates) {
+        User response = userService.updateUser(id, userUpdates);
+
+        return ResponseEntity.ok().body(response);
 
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<User> deleteUser(@PathVariable Long id, @RequestBody User user) {
-
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

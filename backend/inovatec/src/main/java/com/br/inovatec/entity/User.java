@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +26,7 @@ public class User {
     private long userId;
     private String name;
     private String lastName;
+
     private LocalDate dateOfBirth;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -34,6 +39,10 @@ public class User {
         this.name = name;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public User() {
+
     }
 
     public String getName() {
