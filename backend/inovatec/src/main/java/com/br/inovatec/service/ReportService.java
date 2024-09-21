@@ -42,12 +42,12 @@ public class ReportService {
     }
 
     public void deleteReport(Long id) {
-        if (!reportRepository.existsById(id)) {
+        if (reportRepository.existsById(id)) {
+            reportRepository.deleteById(id);
+        } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Não foi possível deletar, denúncia não encontrada");
         }
-
-        reportRepository.deleteById(id);
     }
 
 }
