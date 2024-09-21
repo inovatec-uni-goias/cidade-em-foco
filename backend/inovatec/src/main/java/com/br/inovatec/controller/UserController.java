@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.br.inovatec.entity.User;
 import com.br.inovatec.service.UserService;
 
+//testtttttttttttttt
 @RestController
 @RequestMapping("/user")
 public class UserController {
