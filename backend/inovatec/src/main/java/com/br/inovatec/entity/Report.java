@@ -27,7 +27,7 @@ public class Report {
     private LocalDateTime date;
 
     @ManyToOne
-    @JoinColumn(name = "CPF")
+    @JoinColumn(name = "id")
     private User user;
 
     public Report(Double latitude, Double longitude, LocalDateTime date) {

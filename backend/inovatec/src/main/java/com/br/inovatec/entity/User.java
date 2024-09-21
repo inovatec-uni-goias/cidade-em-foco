@@ -6,6 +6,8 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -15,7 +17,8 @@ import jakarta.persistence.Table;
 public class User {
 
     @Id
-    private long CPF;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String name;
     private String lastName;
     private LocalDate dateOfBirth;
@@ -23,19 +26,10 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Report> userReports = new ArrayList<>();
 
-    public User(long cPF, String name, String lastName, LocalDate dateOfBirth) {
-        CPF = cPF;
+    public User(String name, String lastName, LocalDate dateOfBirth) {
         this.name = name;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public long getCPF() {
-        return CPF;
-    }
-
-    public void setCPF(long cPF) {
-        CPF = cPF;
     }
 
     public String getName() {
