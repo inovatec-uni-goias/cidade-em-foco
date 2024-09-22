@@ -1,5 +1,6 @@
 package com.br.inovatec.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,14 +19,14 @@ public class Account {
     private String email;
     private String password;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
     private User user;
 
-    public Account(String email, String password, User user) {
+    public Account(String email, String password) {
         this.email = email;
         this.password = password;
-        this.user = user;
+
     }
 
     public Account() {

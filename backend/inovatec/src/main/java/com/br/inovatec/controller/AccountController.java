@@ -13,51 +13,48 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.inovatec.entity.User;
-import com.br.inovatec.service.UserService;
-
+import com.br.inovatec.dto.AccountDto;
+import com.br.inovatec.entity.Account;
+import com.br.inovatec.service.AccountService;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/account")
+public class AccountController {
 
     @Autowired
-    private UserService userService;
+    private AccountService accountService;
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User response = userService.createUser(user);
+    public ResponseEntity<Account> createAccount(@RequestBody AccountDto accountDto) {
+        Account response = accountService.createAccount(accountDto);
         return ResponseEntity.ok().body(response);
     }
 
-    @GetMapping
-    public ResponseEntity<List<User>> listAllUsers() {
-        List<User> response = userService.listAllUsers();
+    @GetMapping()
+    public ResponseEntity<List<Account>> listAllAccounts() {
+
+        List<Account> response = accountService.listAllAccounts();
         if (response.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-
         return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        User response = userService.findUserById(id);
-
+    public ResponseEntity<Account> getAccountById(@PathVariable Long id) {
+        Account response = accountService.findAccountById(id);
         return ResponseEntity.ok().body(response);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable long id, User userUpdates) {
-        User response = userService.updateUser(id, userUpdates);
-
+    public ResponseEntity<Account> updateAccount(@PathVariable Long id, @RequestBody Account accountUpdates) {
+        Account response = accountService.updateAccount(id, accountUpdates);
         return ResponseEntity.ok().body(response);
-
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<User> deleteUser(@PathVariable Long id, @RequestBody User user) {
-        userService.deleteUser(id);
+    public ResponseEntity<Account> deleteAccount(@PathVariable Long id) {
+        accountService.deleteAccount(id);
         return ResponseEntity.noContent().build();
     }
 
