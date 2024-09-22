@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import com.br.inovatec.dto.ReportDto;
 import com.br.inovatec.entity.Report;
 import com.br.inovatec.service.ReportService;
 
@@ -25,9 +26,9 @@ public class ReportController {
     private ReportService reportService;
 
     @PostMapping
-    public ResponseEntity<Report> createReport(@RequestBody Report report) {
+    public ResponseEntity<Report> createReport(@RequestBody ReportDto report) {
         if (report.getLatitude() == null || report.getLongitude() == null) {
-            return ResponseEntity.badRequest().body(report);
+            return ResponseEntity.badRequest().build();
         }
         Report response = reportService.createReport(report);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);

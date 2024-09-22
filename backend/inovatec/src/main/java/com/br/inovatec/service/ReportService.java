@@ -8,8 +8,11 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+import com.br.inovatec.dto.ReportDto;
 import com.br.inovatec.entity.Report;
+import com.br.inovatec.entity.User;
 import com.br.inovatec.repository.ReportRepository;
+import com.br.inovatec.repository.UserRepository;
 
 @Service
 public class ReportService {
@@ -17,8 +20,25 @@ public class ReportService {
     @Autowired
     private ReportRepository reportRepository;
 
-    public Report createReport(Report report) {
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
+
+    public Report createReport(ReportDto reportDto) {
+        if (!userRepository.existsById(reportDto.getUserId())) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário inexistente");
+        }
+
+        User user = userService.findUserById(reportDto.getUserId());
+
+        Report report = new Report();
         report.setDate(LocalDateTime.now());
+        report.setDescription(reportDto.getDescription());
+        report.setLatitude(reportDto.getLatitude());
+        report.setLongitude(reportDto.getLongitude());
+        report.setUser(user);
+
         return reportRepository.save(report);
     }
 

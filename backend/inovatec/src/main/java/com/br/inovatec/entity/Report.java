@@ -20,6 +20,7 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long reportId;
 
+    private String description;
     private Double latitude;
     private Double longitude;
 
@@ -38,6 +39,22 @@ public class Report {
 
     public Report() {
 
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Double getLatitude() {
