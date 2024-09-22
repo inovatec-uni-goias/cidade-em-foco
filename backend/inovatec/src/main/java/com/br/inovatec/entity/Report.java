@@ -64,4 +64,12 @@ public class Report {
         this.date = date;
     }
 
+    public long getReportId() {
+        return reportId;
+    }
+
+    public void setReportId(long reportId) {
+        this.reportId = reportId;
+    }
+
 }
