@@ -49,7 +49,6 @@ public class User {
         this.userId = userId;
     }
 
-    }
 
     public void setName(String name) {
         this.name = name;
